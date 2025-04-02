@@ -1,0 +1,66 @@
+# Hangman Game Code
+
+hangman = {
+    6: '''
+
+
+    ''',
+    5: '''¯\\
+
+
+    ''',
+    4: '''¯\\_(
+
+
+      ''',
+    3: '''¯\\_(ツ
+
+
+    ''',
+    2: '''¯\\_(ツ)_
+
+
+    ''',
+    1: '''¯\\_(ツ)_/
+
+
+    ''',
+    0: '''¯\\_(ツ)_/¯'''
+}
+
+import random
+word_list = ["TULIP", "ROSES", "DAISY", "LOTUS", "POPPY", "LILAC"]
+
+answer_word = random.choice(word_list)
+hidden_word = ["_"] * len(answer_word)
+
+remaining_mistakes = 6
+while remaining_mistakes >0 and "_" in hidden_word:
+  print(f"🌺🌼Hidden word is {' '.join(hidden_word)}.🌻🌷")
+  print(hangman[remaining_mistakes])
+  picked_letter = input("🤺👀Guess a letter:").upper()
+
+  index_count = 0
+
+  for letter in range(len(answer_word)):
+    if answer_word[letter] == picked_letter:
+      hidden_word[letter] = picked_letter
+    if letter in range(len(answer_word)) == picked_letter:
+      index_count += 2
+
+  if picked_letter in answer_word:
+      print(f"🧁CORRECT! The word contains the letter {picked_letter}.📢")
+      print(f"🧨You have {remaining_mistakes} remaining tries.🐒")
+
+  else:
+      remaining_mistakes = remaining_mistakes-1
+      print("🌩WRONG!❄️")
+      print(f"🧨You have {remaining_mistakes} remaining tries.🐒")
+
+if remaining_mistakes == 0:
+  print("Shrug! You lost!🤡😡💀")
+  print(hangman[0])
+else:
+  print("Congratulations, you guessed right!🥁🎯🎉")
+
+print(f"🌹The correct word was: {answer_word}.🪷")
